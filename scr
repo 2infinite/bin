@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then 
+ scp -2 -4 -B -q ~/.bashrc1 ~/.screenrc1 root@$1:
+
+ case `basename $0` in
+  s)
+  /usr/bin/ssh root@$1 -t '/bin/bash --rcfile ~/.bashrc1'
+  ;;
+  scr)
+  /usr/bin/ssh root@$1 -t '/usr/bin/screen -c ~/.screenrc1' 
+  ;;
+ esac
+
+else echo "Usage: s|scr hostname"
+fi
+
